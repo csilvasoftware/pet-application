@@ -5,7 +5,7 @@ spring:
     password: ${DB_PASSWORD}
     url: ${DB_URL}
   profiles:
-    active: local
+    active: onPrem
 
   jpa:
     hibernate:
