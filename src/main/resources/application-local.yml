@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: root
+    password: Y!p7i5{M9/
+    url: jdbc:mysql://localhost:3306/petdb
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
