@@ -17,7 +17,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copiar o arquivo JAR gerado para o container
-COPY --from=build /app/target/pet-application.jar app.jar
+COPY --from=build /app/target/spring-petclinic-0.0.1-SNAPSHOT.jar app.jar
 
 # Comando para rodar a aplicação
 CMD ["java", "-jar", "app.jar"]
