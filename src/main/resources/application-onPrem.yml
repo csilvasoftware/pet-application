@@ -1,8 +1,9 @@
 spring:
   datasource:
-    username: adpetupd
-    password: adpetupd
-    url: jdbc:mysql://mysql:3306/petdb
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
