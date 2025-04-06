@@ -1,14 +1,23 @@
-# Usando uma imagem base com OpenJDK 17
-FROM openjdk:17-jdk-slim
+# Usar uma imagem base do OpenJDK para compilação
+FROM maven:3.8.4-openjdk-17-slim AS build
 
-# Definindo diretório de trabalho dentro do container
+# Definir o diretório de trabalho no container
 WORKDIR /app
 
-# Copiar o JAR da aplicação gerado para o container
-COPY target/pet-application.jar app.jar
+# Copiar o código fonte para dentro do container
+COPY . .
 
-# Expor a porta que o Spring Boot vai rodar
-EXPOSE 8080
+# Rodar o build da aplicação com Maven
+RUN mvn clean package -DskipTests
 
-# Comando para rodar o JAR da aplicação
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Usar uma imagem mais leve para rodar a aplicação
+FROM openjdk:17-jdk-slim
+
+# Definir o diretório de trabalho no container
+WORKDIR /app
+
+# Copiar o arquivo JAR gerado para o container
+COPY --from=build /app/target/pet-application.jar app.jar
+
+# Comando para rodar a aplicação
+CMD ["java", "-jar", "app.jar"]
